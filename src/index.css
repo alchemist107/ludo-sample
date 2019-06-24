@@ -3,7 +3,15 @@
   height: 30px;
   background-color: white;
   text-align: center;
-  border: solid;
+  border: solid 2px;
+}
+
+.empty-tile {
+  width: 30px;
+  height: 30px;
+  background-color: white;
+  text-align: center;
+  border: solid 2px white;
 }
 
 .pawn {
@@ -26,7 +34,17 @@
   width: 500px;
 }
 
+.trip {
+  padding: 8px;
+  background: blueviolet;
+  border-radius: 25%;
+}
+
 .board {
   border: solid;
   background-color: aqua;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

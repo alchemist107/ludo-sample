@@ -1,20 +1,26 @@
 import React, { Component } from "react";
 import Tile from "./tile";
+import Empty from "./emptyTile";
 import Pawn from "./pawn";
+import { walkingTiles } from "./data";
 export default class board extends Component {
   state = {
-    cords: [
-      [0, 1, 1, 1],
-      [1, 1, 1, 1],
-      [1, 1, 1, 1],
-      [1, 1, 1, 1],
-      [1, 1, 1, 1],
-      [1, 1, 1, 1],
-      [1, 1, 1, 1],
-      [1, 1, 1, 1]
+    cords: walkingTiles,
+    position: [0, 7],
+    path: [
+      [0, 6],
+      [1, 6],
+      [2, 6],
+      [3, 6],
+      [4, 6],
+      [5, 6],
+      [6, 5],
+      [6, 4],
+      [6, 3],
+      [6, 2],
+      [6, 1],
+      [6, 0]
     ],
-    position: [0, 0],
-    path: [[0, 1], [0, 2], [0, 3], [1, 3], [2, 3], [3, 3]],
     target: 6
   };
   componentDidMount() {
@@ -26,14 +32,21 @@ export default class board extends Component {
 
   mapNewPosition = newPosition => {
     let emptyBoard = [
-      [1, 1, 1, 1],
-      [1, 1, 1, 1],
-      [1, 1, 1, 1],
-      [1, 1, 1, 1],
-      [1, 1, 1, 1],
-      [1, 1, 1, 1],
-      [1, 1, 1, 1],
-      [1, 1, 1, 1]
+      ["x", "x", "x", "x", "x", "x", 6, 7, 8, "x", "x", "x", "x", "x", "x"],
+      ["x", "x", "x", "x", "x", "x", 6, 7, 8, "x", "x", "x", "x", "x", "x"],
+      ["x", "x", "x", "x", "x", "x", 6, 7, 8, "x", "x", "x", "x", "x", "x"],
+      ["x", "x", "x", "x", "x", "x", 6, 7, 8, "x", "x", "x", "x", "x", "x"],
+      ["x", "x", "x", "x", "x", "x", 6, 7, 8, "x", "x", "x", "x", "x", "x"],
+      ["x", "x", "x", "x", "x", "x", 6, 7, 8, "x", "x", "x", "x", "x", "x"],
+      [1, 1, 1, 1, 1, 1, "x", "x", "x", 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, "x", "x", "x", 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, "x", "x", "x", 1, 1, 1, 1, 1, 1],
+      ["x", "x", "x", "x", "x", "x", 6, 7, 8, "x", "x", "x", "x", "x", "x"],
+      ["x", "x", "x", "x", "x", "x", 6, 7, 8, "x", "x", "x", "x", "x", "x"],
+      ["x", "x", "x", "x", "x", "x", 6, 7, 8, "x", "x", "x", "x", "x", "x"],
+      ["x", "x", "x", "x", "x", "x", 6, 7, 8, "x", "x", "x", "x", "x", "x"],
+      ["x", "x", "x", "x", "x", "x", 6, 7, 8, "x", "x", "x", "x", "x", "x"],
+      ["x", "x", "x", "x", "x", "x", 6, 7, 8, "x", "x", "x", "x", "x", "x"]
     ];
     emptyBoard[newPosition[0]][newPosition[1]] = 0;
 
@@ -56,6 +69,7 @@ export default class board extends Component {
 
     let index = 0;
     let timer;
+    console.log(path[index]);
     timer = setInterval(() => {
       if (index <= target) {
         this.mapNewPosition(path[index]);
@@ -105,21 +119,28 @@ export default class board extends Component {
   };
 
   render() {
+    const { cords } = this.state;
     return (
       <div className="board">
-        {this.state.cords.map(el => (
+        {cords.map(el => (
           <div className="horizontal-line">
             {el.map(tile => {
               if (tile === 0) {
                 return <Pawn />;
+              } else if (tile === "x") {
+                return <Empty />;
+              } else {
+                return <Tile />;
               }
-              return <Tile />;
             })}
           </div>
         ))}
-        <span onClick={() => this.dice()} className="trip">
-          Trip
-        </span>
+        <div className="console">
+          <span onClick={() => this.dice()} className="trip">
+            Trip
+          </span>
+          <span>{this.state.target}</span>
+        </div>
       </div>
     );
   }
