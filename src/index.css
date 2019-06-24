@@ -1,8 +1,9 @@
 .tile {
-  width: 23%;
-  height: 50px;
-  background-color: black;
+  width: 30px;
+  height: 30px;
+  background-color: white;
   text-align: center;
+  border: solid;
 }
 
 .pawn {
@@ -20,8 +21,12 @@
 }
 
 .horizontal-line {
-  margin-top: 5px;
   display: flex;
-  justify-content: space-between;
+
   width: 500px;
+}
+
+.board {
+  border: solid;
+  background-color: aqua;
 }

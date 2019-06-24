@@ -106,7 +106,7 @@ export default class board extends Component {
 
   render() {
     return (
-      <div>
+      <div className="board">
         {this.state.cords.map(el => (
           <div className="horizontal-line">
             {el.map(tile => {
